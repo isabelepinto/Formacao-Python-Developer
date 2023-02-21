@@ -110,7 +110,7 @@ def main():
   numero_saques = 0
   extrato = ''
   usuarios = []
-  contas = []
+  numero_contas = []
 
   #iniciando sistema
   print('Olá, seja muito bem-vinde!')
@@ -133,6 +133,11 @@ def main():
     
     elif resposta == 'c':
       cadastrar_usuario(usuarios)
+    
+    elif resposta == 'n':
+      numero_contas = len(contas) + 1
+      
+
 
     elif resposta == '0':
       print('Obrigada, volte sempre!')
