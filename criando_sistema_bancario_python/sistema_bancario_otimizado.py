@@ -73,7 +73,7 @@ Saldo final: R${saldo:.2f}
 {'='*37}\n\n\n''')
 
 
-#funao para cadastrar novo usuario
+#funçao para cadastrar novo usuario
 def cadastrar_usuario(usuarios):
   #usuarios devem ser armazenados em uma lista 
   #deve ter: nome, cpf, data de nascimento e endereço- é uma str com formado: logradouro, nº - bairro - cidade/sigla estado
@@ -100,6 +100,17 @@ def filtrar_usuario(cpf, usuarios):
   return usuarios_filtrados[0] if usuarios_filtrados else None
 
 
+def criar_conta(agencia, numero_conta, usuarios):
+  cpf = input("Informe o CPF do usuário: ")
+  usuario = filtrar_usuario(cpf, usuarios)
+
+  if usuario:
+    print("Conta criada com sucesso!")
+    return {"agencia": agencia, "numero_conta":numero_conta, "usuario":usuario}
+  
+  print("Usuário não encontrado, fluxo de criação de conta encerrado!")
+
+
 def main():
   #declarando constantes
   LIMITE_SAQUES = 3
@@ -110,7 +121,7 @@ def main():
   numero_saques = 0
   extrato = ''
   usuarios = []
-  numero_contas = []
+  contas = []
 
   #iniciando sistema
   print('Olá, seja muito bem-vinde!')
@@ -135,8 +146,11 @@ def main():
       cadastrar_usuario(usuarios)
     
     elif resposta == 'n':
-      numero_contas = len(contas) + 1
-      
+      numero_conta = len(contas) + 1
+      conta = criar_conta(AGENCIA, numero_conta, usuarios)
+
+      if conta:
+        contas.append(conta)
 
 
     elif resposta == '0':
